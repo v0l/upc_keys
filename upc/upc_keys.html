@@ -1,0 +1,13 @@
+<html>
+	<head>
+		<script src="upc.js"></script>
+	</head>
+	<body>
+		<script>
+			Module["print"] = function(x) { document.writeln(x + "</br>"); }
+			var upc_keys = Module.cwrap('upc_keys', null, ['number']);
+		</script>
+		<input type="number" id="id"/>
+		<input type="button" value="Run" onclick="upc_keys(document.getElementById('id').value)" />
+	</body>
+</html>
