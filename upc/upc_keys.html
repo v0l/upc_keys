@@ -1,13 +1,56 @@
 <html>
 	<head>
 		<script src="upc.js"></script>
+		<style>
+			html, body { margin: 0; padding: 0; font-family: Arial; font-size: 14px; }
+			#inputsection {
+				padding: 10px;
+				background-color: #ccc;
+			}
+			#output {
+				border: 1px solid #888;
+				padding: 10px;
+			}
+		</style>
+		<script>
+				(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+				(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+				})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+				ga('create', 'UA-72110562-1', 'auto');
+				ga('send', 'pageview');
+		</script>
+		<!-- If you feel nice 1AfufykJdKKza82Mf9JSNnZaM3ePWFgVfz :) -->
+		<!-- https://www.reddit.com/r/netsec/comments/3z1672/upc_router_wpa2_pass_recovery_tool/ -->
 	</head>
 	<body>
 		<script>
-			Module["print"] = function(x) { document.writeln(x + "</br>"); }
-			var upc_keys = Module.cwrap('upc_keys', null, ['number']);
+			Module["print"] = function(x) { 
+				var con = document.getElementById('output');
+				con.innerHTML = con.innerHTML + x + "\n";
+			}
+			var upc_keys = Module.cwrap('upc_keys', null, ['number', 'number']);
+			
+			function genKeys(){
+				var con = document.getElementById('output');
+				var ssid = document.getElementById('id').value;
+				var mode = (document.getElementById('mode').checked ? 1 : 2);
+				
+				console.log("Generating keys...");
+				console.log("SSID: " + ssid);
+				console.log("MODE: " + mode);
+				con.innerHTML = "";
+				upc_keys(ssid, mode);
+			}
 		</script>
-		<input type="number" id="id"/>
-		<input type="button" value="Run" onclick="upc_keys(document.getElementById('id').value)" />
+		<div id="inputsection">
+			<input type="radio" name="band" id="mode" checked> 2.4GHz<br>
+			<input type="radio" name="band"> 5GHz<br>
+			<input type="number" id="id"/>
+			<input type="button" value="Run" onclick="genKeys()" />
+		</div>
+		<br/>
+		<pre id="output"></pre>
 	</body>
 </html>
