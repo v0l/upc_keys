@@ -9,4 +9,4 @@ Portable upc_keys with build script for emscripten
 
 ## Build
 
-To build you must have [emscripten](http://kripken.github.io/emscripten-site/) installed in your ```PATH```, simply run the ```compile.bat``` once you have this installed.
+To build the JS file you must have [emscripten](http://kripken.github.io/emscripten-site/) installed in your ```PATH```, simply run the ```compile.bat``` once you have this installed.
